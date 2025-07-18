@@ -1,8 +1,21 @@
 <div>
-    <h1>Login</h1>
+    <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
+</div>
+<div>
+    <h1>Register</h1>
 
-    <form action="{{ route('login') }}" method="post">
+    <form action="{{ route('register') }}" method="post">
         @csrf
+
+        <div>
+            <input name="name" placeholder="name">
+
+            @error('name')
+            <span> {{ $message  }} </span>
+            @enderror
+        </div>
+
+        <br>
 
         <div>
             <input name="email" placeholder="email" value="{{ old('email') }}">
@@ -11,6 +24,12 @@
             <span> {{ $message  }} </span>
             @enderror
 
+        </div>
+
+        <br>
+
+        <div>
+            <input name="email_confirmation" placeholder="confirmar email">
         </div>
 
         <br>
@@ -25,7 +44,7 @@
 
         <br>
 
-        <button>Logar</button>
+        <button>Registrar</button>
 
         @if($message = session()->get('message'))
         <div>{{ $message }}</div>
