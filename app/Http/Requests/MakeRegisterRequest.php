@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -31,11 +32,23 @@ class MakeRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'email'],
-            'email' => ['required', 'email', 'confirmed'],
-            'password' => ['required']
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'confirmed', 'max:255'],
+            'password' => ['required', 'min:6']
         ];
     }
 
-    public function tryToRegister() {}
+    public function tryToRegister() {
+     
+        if (User::query()->where('email', '=', $this->email)->first()) {
+            return null;
+        };
+        
+        return User::query()->create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+        ]);
+    
+    }
 }
