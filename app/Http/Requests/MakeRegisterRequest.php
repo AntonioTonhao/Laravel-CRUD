@@ -35,7 +35,7 @@ class MakeRegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'confirmed', 'max:255', 'unique:users'],
-            'password' => ['required', Password::defaults()]
+            'password' => ['required', Password::defaults()],
         ];
     }
 

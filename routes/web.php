@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ChamadoController;
+use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +21,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'register']);
 });
 
-Route::get('/dashboard', fn() => view('dashboard'))->middleware('auth')->name('dashboard');
 
-Route::get('/logout', LogoutController::class)->middleware('auth')->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+    Route::get('/logout', LogoutController::class)->name('logout');
+
+    Route::get('/chamados/create', [ChamadoController::class, 'create'])->name('chamados.create');
+
+    Route::post('/chamados/create', [ChamadoController::class, 'store']);
+});
