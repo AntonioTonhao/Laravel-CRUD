@@ -1,9 +1,4 @@
-<div>
-    <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
-</div>
-<div>
-    <!-- I have not failed. I've just found 10,000 ways that won't work. - Thomas Edison -->
-</div>
+<x-layout.app>
 <div>
     <h1>Create Ticket</h1>
 
@@ -60,3 +55,5 @@
 
 
 </div>
+
+</x-layout.app>

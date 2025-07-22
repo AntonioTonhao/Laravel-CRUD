@@ -23,8 +23,6 @@ class ChamadoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreChamadoRequest $request)
-
-
     {
         /** @var User $user */
 
