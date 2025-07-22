@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Chamado;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class ChamadoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'ticket'=> fake()->name(),
+            'about_ticket' => fake()->name(),
+            'prioridade' => fake()->randomElement(['baixa','media','alta'])
         ];
     }
 }
