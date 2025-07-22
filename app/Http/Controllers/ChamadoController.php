@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chamado;
+
 use App\Http\Requests\StoreChamadoRequest;
 use App\Http\Requests\UpdateChamadoRequest;
 use App\Models\User;
+use App\Models\Chamado;
 
 class ChamadoController extends Controller
 {
@@ -38,7 +39,7 @@ class ChamadoController extends Controller
      */
     public function edit(Chamado $chamado)
     {
-        //
+        return view('chamados.edit', compact('chamado'));
     }
 
     /**
@@ -46,7 +47,10 @@ class ChamadoController extends Controller
      */
     public function update(UpdateChamadoRequest $request, Chamado $chamado)
     {
-        //
+
+        $chamado->fill($request->validated())->save();
+
+        return to_route('dashboard')->with('message', 'Alterado com sucesso!');
     }
 
     /**

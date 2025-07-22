@@ -25,10 +25,12 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
     Route::get('/logout', LogoutController::class)->name('logout');
 
-    Route::get('/chamados/create', [ChamadoController::class, 'create'])->name('chamados.create');
 
+    Route::get('/chamados/create', [ChamadoController::class, 'create'])->name('chamados.create');
     Route::post('/chamados/create', [ChamadoController::class, 'store']);
+
+    Route::get('/chamados/{chamado}/edit', [ChamadoController::class, 'edit'])->name('chamados.edit');
+    Route::put('/chamados/{chamado}/edit', [ChamadoController::class, 'update']);
 });
