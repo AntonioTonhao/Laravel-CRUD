@@ -7,9 +7,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//    Route::get('/', function () {
+//    return view('welcome');
+//    });
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -24,7 +24,7 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard');
     Route::get('/logout', LogoutController::class)->name('logout');
 
 
@@ -33,4 +33,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/chamados/{chamado}/edit', [ChamadoController::class, 'edit'])->name('chamados.edit');
     Route::put('/chamados/{chamado}/edit', [ChamadoController::class, 'update']);
+
+    Route::delete('/chaamdo/{chamado}', [ChamadoController::class, 'destroy'])->name('chamado.destroy');
+
+    Route::patch('/chamado/{chamado}/status', [ChamadoController::class, 'alterStatus'])->name('chamado.alterStatus');
 });

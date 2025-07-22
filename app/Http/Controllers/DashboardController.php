@@ -11,12 +11,12 @@ class DashboardController extends Controller
     public function __invoke()
     {
         /** @var User $user */
-        
+
         $user = auth()->user();
 
-        $chamados = Chamado::all();
-        
-        return view('dashboard',[
+        $chamados = Chamado::orderBy('created_at', 'desc')->get();
+
+        return view('dashboard', [
             'chamados' => $chamados,
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreChamadoRequest;
 use App\Http\Requests\UpdateChamadoRequest;
+use App\Http\Requests\UpdateChamadoStatusRequest;
 use App\Models\User;
 use App\Models\Chamado;
 
@@ -58,6 +59,15 @@ class ChamadoController extends Controller
      */
     public function destroy(Chamado $chamado)
     {
-        //
+        $chamado->delete();
+
+        return to_route('dashboard')->with('message', 'Deletado com sucesso!');
+    }
+
+    public function alterStatus(UpdateChamadoStatusRequest $request, Chamado $chamado)
+    {
+        $chamado->update($request->validated());
+
+        return to_route('dashboard')->with('message', 'Status alterado');
     }
 }

@@ -51,7 +51,11 @@
         <br>
 
         <button>Criar</button>
-    
+        
+        
+        <a href="{{ route('dashboard') }}">Cancelar</a>
+
+        
     </form>
 
 
