@@ -44,6 +44,8 @@ class MakeLoginRequest extends FormRequest
 
                 auth()->login($user);
 
+                $this->session()->regenerate();
+
                 return true;
             }
         }

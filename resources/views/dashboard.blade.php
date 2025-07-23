@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     @vite(['resources/js/app.js', 'resources/css/app.css'])
+
+      
 </head>
-<body class="font-bold bg-gray-50 text-blue-500">
-     @if(session('message'))
+<body class="font-bold bg-orange-300 text-blue-500">
+        @if(session('message'))
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
         Swal.fire({
@@ -24,21 +26,24 @@
         <button>Criar novo chamado</button>
         </form>
         
-        
+        <div class="flex justify-center mt-50">
+                
         <ul>
             
 
         @foreach ( $chamados as $chamado )
 
-        <li>
-
-        <a href="{{ route('chamados.edit', $chamado) }}">{{ $chamado->ticket }}</a>
+        <li class="flex justify-center bg-white p-5 mb-10 w-200 rounded-2xl ">
         
+        <a class="mr-10 font-bold text-black " href="{{ route('chamados.edit', $chamado) }}">{{ $chamado->ticket }}</a>
+        
+        
+        <div class="flex justify-center space-x-3">
         <form action="{{ route('chamado.destroy', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir?')">
         @csrf
         @method('DELETE')
 
-        <button class="bg-blue-600">Deletar</button>
+        <button class="btn btn-error">Deletar</button>
 
         </form>
 
@@ -47,8 +52,8 @@
         @method('PATCH')
         <input type="hidden" name="status" value="concluido">
 
-        <button>Finalizar</button>
-        
+        <button class="btn btn-success">Finalizar</button>
+        </div>
 
         </form>
         </li>
@@ -59,5 +64,5 @@
 </body>
 </html>
 
-<div>
+
        

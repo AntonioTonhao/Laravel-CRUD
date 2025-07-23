@@ -10,4 +10,9 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+     server: {
+        watch: {
+            ignored: ['**/database/**'], // ⛔️ Ignore alterações na pasta database
+        },
+    },
 });

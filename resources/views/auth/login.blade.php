@@ -1,6 +1,6 @@
 <x-layout.app>
     
-    <div class="mx-auto max-w-screen-md flex justify-center py-50 items-center">
+    <div class="mx-auto max-w-screen-md flex justify-center py-20 items-center w-full min-h-screen">
     
     <div class="card bg-blue-600 w-96 shadow-sm">
     
@@ -15,7 +15,7 @@
             <input class="input input-md py-5 w-80" name="email" placeholder="E-mail" value="{{ old('email') }}">
 
             @error('email')
-            <span class="text-sm text-red-500"> {{ $message  }} </span>
+             <p class="text-red-600 text-left w-full text-sm mt-1"> {{ $message  }}</p>
             @enderror
 
         </div>
@@ -28,7 +28,7 @@
             <input class="input py-5 w-80" name="password" type="password" placeholder="Senha">
 
             @error('password')
-            <span class="text-sm text-red-500 "> {{ $message  }} </span>
+             <p class="text-red-600 text-left w-full text-sm mt-1"> {{ $message  }}</p>
             @enderror
         </div>
 
