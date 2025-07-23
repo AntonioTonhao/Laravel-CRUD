@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/chamados/create', [ChamadoController::class, 'create'])->name('chamados.create');
-    Route::post('/chamados/create', [ChamadoController::class, 'store']);
+    Route::post('/chamados/create', [ChamadoController::class, 'store'])->name('chamados.store');
 
     Route::get('/chamados/{chamado}/edit', [ChamadoController::class, 'edit'])->name('chamados.edit');
     Route::put('/chamados/{chamado}/edit', [ChamadoController::class, 'update']);

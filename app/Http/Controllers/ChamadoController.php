@@ -51,7 +51,6 @@ class ChamadoController extends Controller
 
         return to_route('dashboard')->with('message', 'Alterado com sucesso!');
     }
-
     /**
      * Remove the specified resource from storage.
      */

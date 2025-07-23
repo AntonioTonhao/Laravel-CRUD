@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Chamado extends Model
 {
-    use HasFactory;  
+    use HasFactory;
 
     protected $fillable = [
         'ticket',
@@ -15,4 +15,9 @@ class Chamado extends Model
         'prioridade',
         'status',
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
