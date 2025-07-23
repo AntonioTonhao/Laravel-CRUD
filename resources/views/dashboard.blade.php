@@ -9,97 +9,103 @@
     <script defer src="//unpkg.com/alpinejs"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
-      
 </head>
-<body class="font-bold bg-orange-300 text-blue-500 min-h-screen w-full">
-        
-        @if(session('message'))
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-        Swal.fire({
-            title: 'Sucesso!',
-            text: '{{ session("message") }}',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-        </script>
-        @endif       
-        
-    <div class="flex justify-center">
-        <ul class="list bg-blue-100 rounded-box shadow-md w-full max-w-4xl mt-25">
-        
-        <li class="p-5 pb-5 text-xs opacity-60 tracking-wide">
-        <button onclick="document.getElementById('create_modal').showModal()" class="btn">Criar chamado</button>
-        
-        @if ($errors->any())
-        <script>
-            window.onload = function() {
-                document.getElementById('create_modal').showModal();
-            }
-        </script>
-        @endif
+<body class="font-sans bg-gray-100  text-blue-500 min-h-screen w-full">
 
-        <x-modal-create-chamado/>
-        </form>
+
+@if(session('message'))
+<script>
+Swal.fire({
+    title: 'Sucesso!',
+    text: '{{ session("message") }}',
+    icon: 'success',
+    confirmButtonText: 'OK'
+});
+</script>
+@endif
+
+<div class="flex p-8">
+    <ul class="rounded-b-xs shadow-2xl w-full max-w-8xl space-y-4">
+
+        <li class="p-4">
+            <button onclick="document.getElementById('create_modal').showModal()" class="btn btn-neutral">
+                Criar chamado
+            </button>
+            
+            @if ($errors->any())
+            <script>
+                window.onload = function() {
+                    document.getElementById('create_modal').showModal();
+                }
+            </script>
+            @endif
+            <x-modal-create-chamado />
         </li>
 
-    @foreach ($chamados as $chamado)
-      
-    <li class="list-row flex items-center gap-4 p-10 border-t border-base-200  ">
+        @foreach ($chamados as $chamado)
+        <li class="bg-white rounded-md shadow-md p-6 flex justify-between items-start gap-6 border border-gray-300">
             
-        {{-- Abertura do modal/nome do ticket --}}
-        <div class="flex-1">
-          <div class="font-bold text-base text-black mb-2 inline-block">
-           <p class= "link" onclick="document.getElementById('edit_modal_{{ $chamado->id }}').showModal()">{{$chamado->ticket}}</p>
-           <x-modal-edit-chamado :chamado="$chamado" />
-          </div>
+            {{-- Informações do chamado --}}
+            <div class="items-center flex space-x-7">
+                {{-- Título clicável --}}
+                <h2 class="text-lg font-semibold text-gray-900 cursor-pointer link" onclick="document.getElementById('edit_modal_{{ $chamado->id }}').showModal()">
+                    {{ $chamado->ticket }}
+                </h2>
+                <x-modal-edit-chamado :chamado="$chamado" />
 
-           {{-- Descrição --}}
-          <p class=" mb-5 text-xs mt-2 opacity-80">
-            {{ $chamado->about_ticket ?? 'Sem descrição' }}
-          </p>
+                {{-- Descrição --}}
+                <p class="text-sm text-gray-600 mt-2 line-clamp-1">
+                    {{ $chamado->about_ticket ?? 'Sem descrição' }}
+                </p>
 
-            {{-- Prioridade --}}
-          <div class=" mb-5 text-xs uppercase font-semibold opacity-60  {{ $chamado->prioridade == 'alta' ? 'text-red-500' : ($chamado->prioridade == 'media' ? 'text-yellow-500' : 'text-green-500') }}" >   
-            {{ $chamado->prioridade}}
-          </div>
-          
-          {{-- Campos adicionais --}}
-          <div class=" mt-1 text-xs text-gray-500">
-            <span>Status: {{ $chamado->status }}</span> · 
-            <span>Aberto por: {{ $chamado->User->name ?? 'teste'}}</span> · 
-            <span>Criado em: {{ $chamado->created_at->format('d/m/Y') }}</span>
-          </div>
-    
-        </div>
+                {{-- Prioridade como badge --}}
+                <span class="mt-2 px-2 py-1 text-xs rounded-full font-bold uppercase
+                    {{ 
+                        $chamado->prioridade == 'alta' ? 'bg-red-100 text-red-700' :
+                        ($chamado->prioridade == 'media' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700') 
+                    }}
+                ">
+                    {{ $chamado->prioridade }}
+                </span>
 
-        {{-- Botões --}}
-        <div class="flex justify-center items-center gap-2">
-          <form action="{{ route('chamado.destroy', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente finalizar o chamado?')">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-soft btn-secondary" title="Excluir">
-              Excluir
-            </button>
-          </form>
+                {{-- Status e metadata --}}
+                
+                <p>
+                  Status: {{ $chamado->status }} 
+                </p>
+                
+                <p class="text-1xl text-gray-500 mt-2 font-bold ">
+                    
+                    Aberto por: {{ $chamado->User->name ?? 'teste' }} · 
+                    Criado em: {{ $chamado->created_at->format('d/m/Y H:i') }}
+                </p>
+            </div>
 
-          <form action="{{ route('chamado.alterStatus', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente finalizar o chamado?')">
-            @csrf
-            @method('PATCH')
-            <input type="hidden" name="status" value="concluido">
-            <button class="btn btn-soft btn-success" title="Finalizar">
-             Concluir
-            </button>
-          </form>
-        </div>
-      </li>
-    @endforeach
-      </ul>
+            {{-- Botões de ação --}}
+            <div class="flex justify-center items-end gap-2">
+                <form action="{{ route('chamado.destroy', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir o chamado?')">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn bg-red-500 text-white hover:bg-red-900" title="Excluir">
+                        Excluir
+                    </button>
+                </form>
+
+                <form action="{{ route('chamado.alterStatus', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente concluir o chamado?')">
+                    @csrf
+                    @method('PATCH')
+                    <input type="hidden" name="status" value="concluido">
+                    <button class="btn bg-green-600 text-white hover:bg-green-900" title="Concluir">
+                        Finalizar
+                    </button>
+                </form>
+            </div>
+
+        </li>
+        @endforeach
+
+    </ul>
 </div>
+
 </body>
 </html>
-
-
-       

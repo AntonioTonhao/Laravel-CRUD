@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chamado::class);
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'Admin';
+    }
 }

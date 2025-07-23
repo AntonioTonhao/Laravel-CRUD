@@ -3,7 +3,7 @@
   <div class="modal-box bg-blue-300 w-full max-w-3xl h-100">
     <h3 class="text-lg mb-8">Editar Chamado #{{ $chamado->id }}</h3>
 
-    <form action="{{ route('chamados.edit', $chamado) }}" method="post" class="space-y-6">
+    <form action="{{ route('chamados.update', $chamado) }}" method="post" class="space-y-6">
       @csrf
       @method('put')
 

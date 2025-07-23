@@ -14,8 +14,8 @@ class DashboardController extends Controller
 
         $user = auth()->user();
 
-        $chamados = Chamado::orderBy('created_at', 'desc')->get();
-
+        $chamados = $user->isAdmin() ? Chamado::orderBy('created_at', 'desc')->get()
+            : Chamado::where('user_id', $user->id)->get();
         return view('dashboard', [
             'chamados' => $chamados,
         ]);
