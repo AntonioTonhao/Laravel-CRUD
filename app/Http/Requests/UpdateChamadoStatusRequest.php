@@ -22,7 +22,7 @@ class UpdateChamadoStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => ['in:aberto,em_andamento,concluido,cancelado']
+            'status' => ['in:Aberto,Concluido']
         ];
     }
 }

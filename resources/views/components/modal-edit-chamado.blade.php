@@ -8,11 +8,19 @@
       @method('put')
 
       <input name="ticket" value="{{ $chamado->ticket }}" class="input input-bordered w-full text-white bg-blue-700 mb-10" />
-      <input name="about_ticket" value="{{ $chamado->about_ticket }}" class="input input-bordered w-full  text-white bg-blue-700 " />
+      
       <select name="prioridade" class="select select-bordered w-40 text-black bg-orange-300 ">
-        <option value="baixa" {{ $chamado->prioridade == 'baixa' ? 'selected' : '' }}>Baixa</option>
-        <option value="media" {{ $chamado->prioridade == 'media' ? 'selected' : '' }}>Media</option>
-        <option value="alta" {{ $chamado->prioridade == 'alta' ? 'selected' : '' }}>Alta</option>
+        <option value="Baixa"{{ $chamado->prioridade == 'Baixa' ? 'selected' : '' }}>Baixa</option>
+        <option value="Media"{{ $chamado->prioridade == 'Media' ? 'selected' : '' }}>Media</option>
+        <option value="Alta" {{  $chamado->prioridade == 'Alta' ? 'selected' : '' }}>Alta</option>
+      </select>
+
+      <select name="categoria" class="select select-bordered w-40 text-black bg-orange-300 ">
+        <option value="Impressora" {{ $chamado->categoria == 'Impressora' ? 'selected' : '' }}>Impressora</option>
+        <option value="Redes" {{ $chamado->categoria == 'Redes' ? 'selected' : '' }}>Redes</option>
+        <option value="Manutenção PC" {{ $chamado->categoria == 'Manutenção PC' ? 'selected' : '' }}>Manutenção PC</option>
+        <option value="Relogio de ponto" {{ $chamado->categoria == 'Relogio de ponto' ? 'selected' : '' }}>Relogio de ponto</option>
+        <option value="Software" {{ $chamado->categoria == 'Software' ? 'selected' : '' }}>Software</option>
       </select>
 
       <div class="modal-action mt-15">

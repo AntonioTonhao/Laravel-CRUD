@@ -19,13 +19,13 @@
       
     <td class="max-w-[200px] truncate">
     <span class="cursor-pointer hover:underline" onclick="document.getElementById('edit_modal_{{ $chamado->id }}').showModal()">
-        {{ $chamado->about_ticket}}
+        {{ $chamado->ticket}}
     </span>
     </td>
     <x-modal-edit-chamado :chamado="$chamado" /> 
     
     <td> 
-    {{ $chamado->ticket }}
+    {{ $chamado->categoria }}
     </td>
 
      <td>{{ $chamado->User->name}}</td>
@@ -52,7 +52,7 @@
             <form action="{{ route('chamado.alterStatus', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente concluir o chamado?')">
                 @csrf
                 @method('PATCH')
-                <input type="hidden" name="status" value="concluido">
+                <input type="hidden" name="status" value="Concluido">
                 <button class="px-2 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-800 transition cursor-pointer" title="Concluir">
                     Finalizar
                 </button>

@@ -11,7 +11,7 @@ class Chamado extends Model
 
     protected $fillable = [
         'ticket',
-        'about_ticket',
+        'categoria',
         'prioridade',
         'status',
     ];

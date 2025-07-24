@@ -23,8 +23,8 @@ class UpdateChamadoRequest extends FormRequest
     {
         return [
             'ticket' => ['required', 'string'],
-            'about_ticket' => ['required', 'string'],
-            'prioridade' => ['required', 'in:baixa,media,alta'],
+            'categoria' => ['required', 'in:Impressora,Redes,Manutenção PC,Relogio de ponto,Software'],
+            'prioridade' => ['required', 'in:Baixa,Media,Alta'],
         ];
     }
 }

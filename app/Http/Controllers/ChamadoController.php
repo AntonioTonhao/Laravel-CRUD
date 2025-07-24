@@ -64,6 +64,7 @@ class ChamadoController extends Controller
 
     public function alterStatus(UpdateChamadoStatusRequest $request, Chamado $chamado)
     {
+
         $chamado->update($request->validated());
 
         return to_route('dashboard')->with('message', 'Status alterado');

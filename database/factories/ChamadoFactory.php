@@ -19,9 +19,9 @@ class ChamadoFactory extends Factory
     public function definition(): array
     {
         return [
-            'ticket'=> fake()->name(),
-            'about_ticket' => fake()->name(),
-            'prioridade' => fake()->randomElement(['baixa','media','alta'])
+            'ticket' => fake()->name(),
+            'categoria' => fake()->randomElement(['Impressora', 'Redes', 'Manutenção PC', 'Relogio de ponto', 'Software']),
+            'prioridade' => fake()->randomElement(['Baixa', 'Media', 'Alta']),
         ];
     }
 }

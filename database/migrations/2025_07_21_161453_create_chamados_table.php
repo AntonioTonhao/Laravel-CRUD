@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('chamados', function (Blueprint $table) {
             $table->id();
             $table->string('ticket');
-            $table->string('about_ticket');
-            $table->enum('prioridade', ['baixa', 'media', 'alta']);
-            $table->enum('status', ['aberto', 'em_andamento', 'concluido', 'cancelado'])->default('aberto');
+            $table->enum('categoria', ['Impressora', 'Redes', 'Manutenção PC', 'Relogio de ponto', 'Software']);
+            $table->enum('prioridade', ['Baixa', 'Media', 'Alta']);
+            $table->enum('status', ['Aberto', 'Concluido'])->default('Aberto');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
