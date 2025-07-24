@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
-<body class="font-sans bg-gray-100  text-blue-500 min-h-screen w-full">
+<body class="font-sans bg-slate-800 text-gray-200 min-h-screen w-full">
 
 
 @if(session('message'))
@@ -24,87 +24,28 @@ Swal.fire({
 </script>
 @endif
 
-<div class="flex p-8">
-    <ul class="rounded-b-xs shadow-2xl w-full max-w-8xl space-y-4">
 
-        <li class="p-4">
-            <button onclick="document.getElementById('create_modal').showModal()" class="btn btn-neutral">
-                Criar chamado
-            </button>
+<x-navigation/>
+
+<div class="flex justify-between items-center mb-4 p-8">
+    <a onclick="document.getElementById('create_modal').showModal()" class="btn bg-blue-600 text-white hover:bg-blue-800">
+        + Criar chamado
+    </a>
+</div>
+
             
-            @if ($errors->any())
-            <script>
-                window.onload = function() {
-                    document.getElementById('create_modal').showModal();
-                }
-            </script>
-            @endif
-            <x-modal-create-chamado />
-        </li>
+@if ($errors->any())
+    <script>
+    window.onload = function() {
+    document.getElementById('create_modal').showModal();
+    }
+    </script>
+@endif
+<x-modal-create-chamado />
 
-        @foreach ($chamados as $chamado)
-        <li class="bg-white rounded-md shadow-md p-6 flex justify-between items-start gap-6 border border-gray-300">
-            
-            {{-- Informações do chamado --}}
-            <div class="items-center flex space-x-7">
-                {{-- Título clicável --}}
-                <h2 class="text-lg font-semibold text-gray-900 cursor-pointer link" onclick="document.getElementById('edit_modal_{{ $chamado->id }}').showModal()">
-                    {{ $chamado->ticket }}
-                </h2>
-                <x-modal-edit-chamado :chamado="$chamado" />
 
-                {{-- Descrição --}}
-                <p class="text-sm text-gray-600 mt-2 line-clamp-1">
-                    {{ $chamado->about_ticket ?? 'Sem descrição' }}
-                </p>
-
-                {{-- Prioridade como badge --}}
-                <span class="mt-2 px-2 py-1 text-xs rounded-full font-bold uppercase
-                    {{ 
-                        $chamado->prioridade == 'alta' ? 'bg-red-100 text-red-700' :
-                        ($chamado->prioridade == 'media' ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700') 
-                    }}
-                ">
-                    {{ $chamado->prioridade }}
-                </span>
-
-                {{-- Status e metadata --}}
-                
-                <p>
-                  Status: {{ $chamado->status }} 
-                </p>
-                
-                <p class="text-1xl text-gray-500 mt-2 font-bold ">
-                    
-                    Aberto por: {{ $chamado->User->name ?? 'teste' }} · 
-                    Criado em: {{ $chamado->created_at->format('d/m/Y H:i') }}
-                </p>
-            </div>
-
-            {{-- Botões de ação --}}
-            <div class="flex justify-center items-end gap-2">
-                <form action="{{ route('chamado.destroy', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir o chamado?')">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn bg-red-500 text-white hover:bg-red-900" title="Excluir">
-                        Excluir
-                    </button>
-                </form>
-
-                <form action="{{ route('chamado.alterStatus', $chamado) }}" method="POST" onsubmit="return confirm('Deseja realmente concluir o chamado?')">
-                    @csrf
-                    @method('PATCH')
-                    <input type="hidden" name="status" value="concluido">
-                    <button class="btn bg-green-600 text-white hover:bg-green-900" title="Concluir">
-                        Finalizar
-                    </button>
-                </form>
-            </div>
-
-        </li>
-        @endforeach
-
-    </ul>
+<div class="flex p-10">
+<x-list :chamados="$chamados" />
 </div>
 
 </body>

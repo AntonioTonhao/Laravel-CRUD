@@ -6,8 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }}</title>
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-200 h-full">
+    @if(session('message'))
+        <script>
+        Swal.fire({
+            title: 'Sucesso!',
+            text: '{{ session("message") }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+        </script>
+    @endif
     {{ $slot }}
 </body>
 </html>

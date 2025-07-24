@@ -2,23 +2,23 @@
 
 - Deve existir dois tipos de usuarios (Admin e Padrao) [X]
 
-- Usuarios padrao podem acessar somente os chamados criados por ele mesmo
+- Usuarios padrao podem acessar somente os chamados criados por ele mesmo [X]
 
-- Administradores podem acessar todos os chamados, alterar e concluir
+- Administradores podem acessar todos os chamados, alterar e concluir [X]
 
-- Somente administradores podem registrar novos usuarios
+- Somente administradores podem registrar novos usuarios [X]
 
 
 - [Usuarios]
 
-- Devem possuir acesso a "Meus chamados" e C"riar novo chamado"
+- Devem possuir acesso a "Meus chamados" e "Criar novo chamado" [X]
 
 - [Administradores]
 
-- Devem possuir acesso a todos os chamados
+- Devem possuir acesso a todos os chamados [X]
 
-- Devem conseguir atualizar chamados
+- Devem conseguir atualizar chamados [X]
 
-- Devem conseguir finalizar chamados
+- Devem conseguir finalizar chamados [X]
 
-- Devem conseguir excluir chamados
+- Devem conseguir excluir chamados [X]

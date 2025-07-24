@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateChamadoRequest;
 use App\Http\Requests\UpdateChamadoStatusRequest;
 use App\Models\User;
 use App\Models\Chamado;
+use Illuminate\Support\Facades\Auth;
 
 class ChamadoController extends Controller
 {
@@ -26,7 +27,7 @@ class ChamadoController extends Controller
     {
         /** @var User $user */
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         $user->chamados()->create($request->validated());
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chamado;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Chamado;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -12,10 +12,11 @@ class DashboardController extends Controller
     {
         /** @var User $user */
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         $chamados = $user->isAdmin() ? Chamado::orderBy('created_at', 'desc')->get()
             : Chamado::where('user_id', $user->id)->get();
+
         return view('dashboard', [
             'chamados' => $chamados,
         ]);

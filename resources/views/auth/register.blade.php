@@ -1,5 +1,5 @@
-<x-layout.app>
-
+<x-layout.app/>
+<x-navigation/>
     <div class="mx-auto max-w-screen-md flex justify-center py-20 items-center w-full min-h-screen">
     
     <div class="card bg-gray-100 w-100 shadow-sm h-150">
@@ -60,15 +60,8 @@
         <br>
 
         <button class="btn btn-soft btn-info w-40">Registrar</button>
-
-        @if($message = session()->get('message'))
-        <div class="text-sm text-red-500">{{ $message }}</div>
-        @endif
-
     </form>
 
 </div>
 </div>
 </div>
-
-</x-layout.app>

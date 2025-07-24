@@ -7,7 +7,7 @@
       @csrf
       @method('put')
 
-      <input name="ticket" value="{{ $chamado->ticket }}" class="input input-bordered w-full text-white bg-blue-700" />
+      <input name="ticket" value="{{ $chamado->ticket }}" class="input input-bordered w-full text-white bg-blue-700 mb-10" />
       <input name="about_ticket" value="{{ $chamado->about_ticket }}" class="input input-bordered w-full  text-white bg-blue-700 " />
       <select name="prioridade" class="select select-bordered w-40 text-black bg-orange-300 ">
         <option value="baixa" {{ $chamado->prioridade == 'baixa' ? 'selected' : '' }}>Baixa</option>

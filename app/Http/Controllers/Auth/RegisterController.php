@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function register(MakeRegisterRequest $request)
     {
         if ($request->tryToRegister()) {
-            return to_route('login');
+            return back()->with((['message' => 'Registro realizado com sucesso']));
         }
 
         return back()->with(['message' => 'Registro invalido']);
