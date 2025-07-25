@@ -69,4 +69,5 @@ class ChamadoController extends Controller
 
         return to_route('dashboard')->with('message', 'Status alterado');
     }
+
 }

@@ -33,7 +33,6 @@ Swal.fire({
     </a>
 </div>
 
-            
 @if ($errors->any())
     <script>
     window.onload = function() {
